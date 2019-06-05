@@ -1,0 +1,11 @@
+{% include 'base.html' %}
+
+    {% block body_block %}
+
+    {% if user.is_authenticated %}
+        <h5>Hi {{user.username}}</h5>
+    {% else %}
+        <h5>You are not signed in at the moment</h5>
+    {% endif %}
+        
+    {% endblock %}

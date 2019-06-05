@@ -1,0 +1,36 @@
+{% include 'base.html' %}
+
+    {% block body_block %}
+
+    <div class="container">
+
+        <h4>Create an Employee</h4>
+        <br />
+
+        
+        <form method="POST">
+            {% csrf_token %}
+                {{form.as_p}}
+
+
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                    </button>
+                <br>
+        </form>
+
+            
+    
+    </div>
+
+
+    <script>
+    M.AutoInit();   
+
+    $(document).ready(function(){
+                $('.datepicker').datepicker({format: 'yyyy-mm-dd'});
+    });
+
+    </script>
+   
+        
+    {% endblock %}

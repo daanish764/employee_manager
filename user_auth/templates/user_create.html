@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+    {% block body_block %}
+
+    <style>
+        .helptext {
+            font-size: 10px;
+        }
+    
+    </style>
+        <div class="container">
+                <h3>Create Manager Account</h3>
+                <form method="POST">
+                    {% csrf_token %}
+
+                    {% if user_form.errors %}
+                    
+                    {% for field in user_form %}
+                        {% for error in field.errors %}
+                        <script>
+                        M.toast({html: '{{error}}'})
+                        </script>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in user_form.non_field_errors %}
+                    <script>
+                            M.toast({html: '{{error}}'})
+                    </script>
+                    {% endfor %}
+                {% endif %}
+                <br />
+    
+                    {{ user_form.as_p}}
+                    {{ form.as_p }}
+                    
+                <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                </button>
+                </form>
+        </div>
+        <br />
+
+        <script>
+            $(document).ready(function(){
+                $('select').formSelect();
+            });
+            $(document).ready(function(){
+                $('.datepicker').datepicker({format: 'yyyy-mm-dd'});
+            });
+
+        </script>
+    {% endblock %}
+
+ 
