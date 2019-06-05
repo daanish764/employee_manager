@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from .models import Employees
 from . import forms 
-from django.urls import reverse
+from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 def index(request):
@@ -34,3 +34,13 @@ class EmployeeCreateView(LoginRequiredMixin, CreateView):
 
 class EmployeeDetailView(LoginRequiredMixin, DetailView):
     model = Employees
+
+class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
+    model = Employees
+    fields = ('name', 'location', 'gender', 'birth_date', 'yearly_salary', 'role', 'degree', 'description')
+
+    def get_success_url(self):
+        return reverse('employee:employee_detail', kwargs={'pk': self.object.id})
+
+    login_url = '/'
+    redirect_field_name = ''

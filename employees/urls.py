@@ -17,4 +17,5 @@ urlpatterns = [
     path('', views.EmployeeListView.as_view(), name='index'),
     path('add/', views.EmployeeCreateView.as_view(), name='employee_create'),
     path('view/<int:pk>/', views.EmployeeDetailView.as_view(), name='employee_detail'),
+    path('update/<int:pk>/', views.EmployeeUpdateView.as_view(), name='employee_update'),
 ]
