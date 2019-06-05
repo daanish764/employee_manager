@@ -26,10 +26,25 @@
         </li>
     </ul>
 
-    <a class="waves-effect waves-light btn" style="background-color:#FF8C00;" href="{% url 'employee:employee_update' pk=employees.pk %}">Update Info</a>
+    <br>
 
-    <a class="waves-effect waves-light btn" style="background-color:red;" href="{% url 'employee:employee_delete' pk=employees.pk %}">Delete Employee</a>
+    <form action="" method="post">{% csrf_token %}
+        <button data-target="modal1"  class='btn btn-danger modal-trigger' style="background-color:red;">Delete Employee </button>
 
+              <!-- Modal Structure -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                <h4>Delete Employee</h4>
+                <p>ARE YOU SURE YOU WANT TO DELETE {{ object }}?</p>
+                </div>
+                <div class="modal-footer">
+                <input class="modal-close waves-effect waves-green btn-flat" type="submit" value="Delete Employee" />
+                </div>
+            </div>
+
+      </form>
+
+  
 
     </div>
     

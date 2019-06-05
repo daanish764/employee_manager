@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from .models import Employees
 from . import forms 
 from django.urls import reverse_lazy, reverse
@@ -35,12 +35,23 @@ class EmployeeCreateView(LoginRequiredMixin, CreateView):
 class EmployeeDetailView(LoginRequiredMixin, DetailView):
     model = Employees
 
+    login_url = '/'
+    redirect_field_name = ''
+
 class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
     model = Employees
     fields = ('name', 'location', 'gender', 'birth_date', 'yearly_salary', 'role', 'degree', 'description')
 
     def get_success_url(self):
         return reverse('employee:employee_detail', kwargs={'pk': self.object.id})
+
+    login_url = '/'
+    redirect_field_name = ''
+
+class EmployeeDeleteView(LoginRequiredMixin, DeleteView):
+    model = Employees
+
+    success_url = reverse_lazy('employee:index')
 
     login_url = '/'
     redirect_field_name = ''
