@@ -73,6 +73,8 @@ class NoteDeleteView(LoginRequiredMixin, DeleteView):
     redirect_field_name = ''
 
 def add_note_to_post(request, pk):
+
+    employee = get_object_or_404(Employees, pk=pk)
     
     if request.method == 'POST':
         form = forms.NoteCreateForm(request.POST)
@@ -87,4 +89,4 @@ def add_note_to_post(request, pk):
     else:
         form = forms.NoteCreateForm()
 
-    return render(request, 'employees/notes_form.html', {'form':form})
+    return render(request, 'employees/notes_form.html', {'form':form, 'employees':employee})
