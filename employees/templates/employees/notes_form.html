@@ -26,33 +26,19 @@
         </li>
     </ul>
 
-    <a class="waves-effect waves-light btn" style="background-color:#FF8C00;" href="{% url 'employee:employee_update' pk=employees.pk %}">Update Info</a>
+    <form method="post">
+        {% csrf_token %}
+        {{form}}
 
-    <a class="waves-effect waves-light btn" style="background-color:red;" href="{% url 'employee:employee_delete' pk=employees.pk %}">Delete Employee</a>
+        <br /> <br /> <br />
 
-    <a class="waves-effect waves-light btn" style="background-color:green;" href="{% url 'employee:add_note_to_employee' pk=employees.pk %}">Add Note</a>
+        <button class="btn waves-effect waves-light" type="submit" name="action">
+            Submit
+        </button>
 
-
-    <h4>Notes</h4>
-
-
-    {% for note in notes %}
-
-
-    <ul class="collection">
-      <li class="collection-item avatar">
-
-          <img src="http://cdn.osxdaily.com/wp-content/uploads/2015/09/notes-icon-ios-610x605.jpg" width="60" height="60" class="circle">
-
-    {{ note }}
-
-      <a href="#!" class="secondary-content" style="color:red;"><i class="material-icons">close</i></a>
-      </li>
-    </ul>
-
-    {% endfor %}
-
-    </div>
+        
+    <br> <br />
+    </form>
     
         
     {% endblock %}

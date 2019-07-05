@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from .models import Employees
+from .models import Employees, Notes
 from . import forms 
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -38,6 +38,13 @@ class EmployeeDetailView(LoginRequiredMixin, DetailView):
     login_url = '/'
     redirect_field_name = ''
 
+
+    def get_context_data(self, **kwargs):
+        context = super(EmployeeDetailView, self).get_context_data(**kwargs)
+        notes = Notes.objects.filter(employee_id=self.object.pk)       
+        context['notes'] = notes
+        return context
+
 class EmployeeUpdateView(LoginRequiredMixin, UpdateView):
     model = Employees
     fields = ('name', 'location', 'gender', 'birth_date', 'yearly_salary', 'role', 'degree', 'description')
@@ -55,3 +62,21 @@ class EmployeeDeleteView(LoginRequiredMixin, DeleteView):
 
     login_url = '/'
     redirect_field_name = ''
+
+
+def add_note_to_post(request, pk):
+    
+    if request.method == 'POST':
+        form = forms.NoteCreateForm(request.POST)
+
+        if form.is_valid():
+            note = form.save(commit=False)
+            employee = get_object_or_404(Employees, pk=pk)
+            note.employee = employee
+            note.save()
+            return redirect('employee:employee_detail', pk=pk)
+            pass
+    else:
+        form = forms.NoteCreateForm()
+
+    return render(request, 'employees/notes_form.html', {'form':form})

@@ -25,3 +25,13 @@ class Employees(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Notes(models.Model):
+    employee = models.ForeignKey('employees.Employees', related_name="notes", on_delete=models.CASCADE)
+    text = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self):
+        return self.text
