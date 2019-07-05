@@ -4,6 +4,7 @@ from .models import Employees, Notes
 from . import forms 
 from django.urls import reverse_lazy, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, "employee/index.html")
@@ -72,6 +73,7 @@ class NoteDeleteView(LoginRequiredMixin, DeleteView):
     login_url = '/'
     redirect_field_name = ''
 
+@login_required
 def add_note_to_post(request, pk):
 
     employee = get_object_or_404(Employees, pk=pk)
