@@ -1,0 +1,65 @@
+{% include 'base.html' %}
+
+    {% block body_block %}
+
+    <div class="container">
+
+            <h4>Employee Detail</h4>
+            
+            <ul class="collection">
+                <li class="collection-item avatar">
+                  <img src="https://cdn2.iconfinder.com/data/icons/ios-7-icons/50/user_male2-512.png" width="60" height="60" class="circle">
+                  <span class="title">Name: {{object.employee.name}} </span>
+                  <p>
+                      <br>
+                    <b>Location:</b> {{object.employee.location}} <br>
+                    <b>Gender:</b> {{object.employee.gender}} <br>
+                    <b>Birth Date:</b> {{object.employee.birth_date}} <br>
+                    <b>Yearly Salary:</b> {{object.employee.yearly_salary}} <br>
+                    <b>Role:</b> {{object.employee.role}} <br>
+                    <b>Degree:</b> {{object.employee.degree}} <br>
+                    <b>Description:</b> {{object.employee.description}} <br>
+                    <b>Created Date:</b> {{object.employee.created_date}} <br>
+                    <b>Manager: </b> {{object.employee.manager.username}}
+                  </p>
+                  <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+                </li>
+            </ul>
+
+    <br>
+
+    <h5>The note you want to delete</h5>
+    <ul class="collection">
+        <li class="collection-item avatar">
+    
+            <img src="http://cdn.osxdaily.com/wp-content/uploads/2015/09/notes-icon-ios-610x605.jpg" width="60" height="60" class="circle">
+    
+        {{ object }}
+    
+        
+        </li>
+        </ul>
+
+    <form action="" method="post">{% csrf_token %}
+        <button data-target="modal1"  class='btn btn-danger modal-trigger' style="background-color:red;">Delete NOTE </button>
+
+              <!-- Modal Structure -->
+            <div id="modal1" class="modal">
+                <div class="modal-content">
+                <h4>Delete Note</h4>
+                <p>ARE YOU SURE YOU WANT TO DELETE THIS NOTE?</p>
+                </div>
+                <div class="modal-footer">
+                <input class="modal-close waves-effect waves-green btn-flat" type="submit" value="Delete Note" />
+                </div>
+            </div>
+            <br /> <br />
+
+      </form>
+
+  
+
+    </div>
+    
+        
+    {% endblock %}

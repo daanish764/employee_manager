@@ -46,7 +46,7 @@
 
     {{ note }}
 
-      <a href="#!" class="secondary-content" style="color:red;"><i class="material-icons">close</i></a>
+      <a href="{% url 'employee:delete_note' pk=note.pk %}" class="secondary-content" style="color:red;"><i class="material-icons">close</i></a>
       </li>
     </ul>
 

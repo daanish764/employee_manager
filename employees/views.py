@@ -64,6 +64,14 @@ class EmployeeDeleteView(LoginRequiredMixin, DeleteView):
     redirect_field_name = ''
 
 
+class NoteDeleteView(LoginRequiredMixin, DeleteView):
+    model = Notes
+
+    success_url = reverse_lazy('employee:index')
+
+    login_url = '/'
+    redirect_field_name = ''
+
 def add_note_to_post(request, pk):
     
     if request.method == 'POST':
