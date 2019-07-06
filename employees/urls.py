@@ -6,13 +6,6 @@ from . import views
 
 app_name = "employee"
 
-# need to do 
-# create employee
-# delete employee
-# modify employee
-# add comments (notes) to employees
-# fire employees
-
 urlpatterns = [
     path('', views.EmployeeListView.as_view(), name='index'),
     path('add/', views.EmployeeCreateView.as_view(), name='employee_create'),
